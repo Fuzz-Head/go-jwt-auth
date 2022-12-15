@@ -1,13 +1,21 @@
 package main
 
 import (
+	"log"
 	"os"
 
+	routes "github.com/fuzzhead/routes"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	port = os.Getenv("PORT")
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	port := os.Getenv("PORT")
 
 	if port == "" {
 		port = "8000"
@@ -16,8 +24,8 @@ func main() {
 	router := gin.New()
 	router.Use(gin.Logger())
 
-	routes.authRoutes(router)
-	routes.userRoutes(router)
+	routes.AuthRoutes(router)
+	routes.UserRoutes(router)
 
 	router.GET("/api-1", func(c *gin.Context) {
 		c.JSON(200, gin.H{"Success": "Access granted for api-1"})

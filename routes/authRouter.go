@@ -1,12 +1,12 @@
 package routes
 
 import (
-	controller "jwt-auth/controllers"
+	controller "github.com/fuzzhead/controllers"
 
 	"github.com/gin-gonic/gin"
 )
 
 func AuthRoutes(incomingRoutes *gin.Engine) {
-	incomingRoutes.POST("users/sigup", controller.Signup())
+	incomingRoutes.POST("users/signup", controller.Signup())
 	incomingRoutes.POST("users/login", controller.Login())
 }
